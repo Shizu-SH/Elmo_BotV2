@@ -1,4 +1,17 @@
-const ruletaCooldown = 3600000; // 1 hora de tiempo de reutilización
+const ruletaCooldown = 300000; // 5 minutos de tiempo de reutilización
+
+function msToTime(duration) {
+  const milliseconds = parseInt((duration % 1000) / 100);
+  let seconds = Math.floor((duration / 1000) % 60);
+  let minutes = Math.floor((duration / (1000 * 60)) % 60);
+  let hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+  hours = (hours < 10) ? '0' + hours : hours;
+  minutes = (minutes < 10) ? '0' + minutes : minutes;
+  seconds = (seconds < 10) ? '0' + seconds : seconds;
+
+  return hours + ' horas, ' + minutes + ' minutos y ' + seconds + ' segundos';
+}
 
 const handlerRuletaRusa = async (m, { conn }) => {
   const usuarioActual = global.db.data.users[m.sender];
